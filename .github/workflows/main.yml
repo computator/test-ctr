@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: docker login ghcr.io -u token -p ${{ github.token }}
+      - run: docker login ghcr.io -u token -p ${{ secrets.WRITE_PACKAGES_TOKEN }}
 
       - run: docker build . -t ${{ env.IMAGE }}
 
