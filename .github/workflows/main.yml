@@ -1,0 +1,19 @@
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE: ghcr.io/${{ github.repository }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: docker login ghcr.io -u token -p ${{ github.token }}
+
+      - run: docker build . -t ${{ env.IMAGE }}
+
+      - run: docker push ${{ env.IMAGE }}
